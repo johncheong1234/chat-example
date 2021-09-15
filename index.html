@@ -38,7 +38,7 @@
 
     form.addEventListener('submit', function(e) {
     e.preventDefault();
-    
+    if (input.value) {
       console.log(sender.value)
       const sender_value = sender.value
       const receiver_value = receiver.value
@@ -47,7 +47,7 @@
       socket.sender = sender.value
       socket.emit('chat message', {msg: input.value, sender: sender.value, receiver: receiver.value});
       input.value = ''
-    
+    }
     })
     
     socket.on('chat message',({msg,sender,receiver})=>{
