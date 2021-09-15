@@ -45,17 +45,46 @@
       socket.auth = { sender_value, receiver_value };
       socket.connect();
       socket.sender = sender.value
-      socket.emit('chat message', input.value+'_'+sender.value+'_'+receiver.value);
+      socket.emit('chat message', {msg: input.value, sender: sender.value, receiver: receiver.value});
       input.value = ''
     }
     })
     
-    socket.on('chat message',function(msg){
+    socket.on('chat message',({msg,sender,receiver})=>{
         var item = document.createElement('li');
+        var button = document.createElement("button");
+        button.innerHTML = "delete";
+
+        button.addEventListener('click', () => {
+        console.log('clicked');
+        // document.getElementById(msg).remove()
+        // my_array = msg.split('_')
+
+        socket.emit("delete", {
+          msg: msg,
+          sender: sender,
+          receiver: receiver
+        });
+        
+        }, false);
+        
+        // my_array = msg.split('_')
         item.textContent = msg;
+
+        item.appendChild(button);
+        button.setAttribute('class','button')
+        item.setAttribute('id',msg)
+
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
     });
+
+    socket.on('delete',function(msg){
+      console.log(msg)
+      document.getElementById(msg).remove()
+    })
+
+
     </script>
   </body>
 </html>

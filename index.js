@@ -17,18 +17,22 @@ io.on('connection', (socket) => {
 
   socket.join(socket.handshake.auth.sender_value);
 
-  socket.on('chat message', (msg)=>{
-
-    my_array = msg.split('_')
-
-    // io.emit('chat message', my_array[0]);
-    io.to(socket.handshake.auth.sender_value).to(my_array[2]).emit('chat message', my_array[0]);
+  socket.on('chat message', ({msg, sender, receiver})=>{
+    console.log('chat message sent')
+    console.log(msg, sender, receiver)
+    io.to(socket.handshake.auth.sender_value).to(receiver).emit('chat message', {msg, sender, receiver});
 
   })
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
+
+  socket.on('delete', ({msg, sender, receiver})=>{
+    console.log('message deleted')
+    console.log(msg, sender, receiver)
+    io.to(sender).to(receiver).emit('delete',msg);
+  })
 });
 
 server.listen(3000, () => {
