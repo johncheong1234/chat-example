@@ -19,10 +19,10 @@ io.on('connection', (socket) => {
 
   socket.on('chat message', (msg)=>{
 
-     my_array = msg.split('_')
+    my_array = msg.split('_')
 
-      // io.emit('chat message', my_array[0]);
-      io.to(socket.handshake.auth.sender_value).to(socket.handshake.auth.receiver_value).emit('chat message', my_array[0]);
+    // io.emit('chat message', my_array[0]);
+    io.to(socket.handshake.auth.sender_value).to(my_array[2]).emit('chat message', my_array[0]);
 
   })
 
