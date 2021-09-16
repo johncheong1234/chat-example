@@ -29,10 +29,11 @@ app.get('/find_all',(req,res)=>{
         console.log(JSON.parse(JSON.stringify(result)))
         res.send(JSON.parse(JSON.stringify(result)))
       }
+      con.end()
     });
   })
   
-  con.end()
+  
 })
 
 app.post('/find_one',(req,res)=>{
@@ -41,9 +42,10 @@ app.post('/find_one',(req,res)=>{
     con.query(`SELECT * FROM users WHERE username = "${req.body['username']}"`, function (err, result, fields) {
         res.send(JSON.parse(JSON.stringify(result)))
     });
+    con.end()
   });
 
-  con.end()
+  
 })
 
 server.listen(2000, () => {
