@@ -4,23 +4,60 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
+const axios = require('axios')
+app.use(express.urlencoded({
+  extended: true
+}))
 
-app.get('/', (req, res) => {
-  // console.log(req.params.user)
-  res.sendFile(__dirname + '/index.html');
 
+
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+
+async function postData(url, stringData) {
+  let resp = await axios({
+    method: 'post',
+    url: url,
+    data: stringData,
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    maxContentLength: 100000000,
+    maxBodyLength: 1000000000
+  }).catch(err => {
+    throw err;
+  })
+  console.log("postData: response:", resp.data);
+  return resp;
+}
+
+app.post('/chat', async(req, res) => {
+  const username = req.body.username
+
+  await postData('http://localhost:2000/find_one',JSON.stringify({username: username})).then(function(response){
+    if(response.data.length>0){
+      res.render(__dirname + '/index.html', {username: username});
+    }else{
+      res.redirect('/login');
+    }
+
+  }
+  ) 
+  
 });
+
+app.get('/login',(req,res)=>{
+  res.sendFile(__dirname+'/login.html')
+})
 
 io.on('connection', (socket) => {
   console.log('a user connected');
   console.log(socket.handshake)
 
-  socket.join(socket.handshake.auth.sender_value);
+  socket.join(socket.handshake.auth.username);
 
   socket.on('chat message', ({msg, sender, receiver})=>{
     console.log('chat message sent')
     console.log(msg, sender, receiver)
-    io.to(socket.handshake.auth.sender_value).to(receiver).emit('chat message', {msg, sender, receiver});
+    io.to(socket.handshake.auth.username).to(receiver).emit('chat message', {msg, sender, receiver});
 
   })
 

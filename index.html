@@ -16,11 +16,11 @@
     </style>
   </head>
   <body>
-    <h1 id='freak'>hi</h1>
+    <h1 id='username'><%= username %></h1>
     <ul id="messages"></ul>
     <form id="form" action="">
       <input id="input" autocomplete="off" /><button>Send</button>
-      <input id="sender" autocomplete="off" /><button>Sender</button>
+      <!-- <input id="sender" autocomplete="off" /><button>Sender</button> -->
       <input id="receiver" autocomplete="off" /><button>Receiver</button>
     </form>
 
@@ -30,22 +30,25 @@
     autoConnect: false
     });
 
+    var username = document.getElementById('username').innerHTML
+    console.log(username)
     var form = document.getElementById('form');
     var input = document.getElementById('input');
-    var sender = document.getElementById('sender');
+    // var sender = document.getElementById('sender');
     var receiver = document.getElementById('receiver');
-    var test = document.getElementById('freak').innerHTML
+    const receiver_value = receiver.value 
+    socket.auth = { username };
+    socket.connect();
 
     form.addEventListener('submit', function(e) {
     e.preventDefault();
-    if (input.value) {
-      console.log(sender.value)
-      const sender_value = sender.value
+    if (input.value && receiver.value) {
+      console.log(username)
+      // console.log(sender.value)
+      const sender_value = username
       const receiver_value = receiver.value
-      socket.auth = { sender_value, receiver_value };
-      socket.connect();
-      socket.sender = sender.value
-      socket.emit('chat message', {msg: input.value, sender: sender.value, receiver: receiver.value});
+      // socket.sender = sender.value
+      socket.emit('chat message', {msg: input.value, sender: username, receiver: receiver.value});
       input.value = ''
     }
     })
