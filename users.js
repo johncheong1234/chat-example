@@ -30,7 +30,9 @@ app.get('/find_all',(req,res)=>{
         res.send(JSON.parse(JSON.stringify(result)))
       }
     });
-  });
+  })
+  
+  con.end()
 })
 
 app.post('/find_one',(req,res)=>{
@@ -41,6 +43,7 @@ app.post('/find_one',(req,res)=>{
     });
   });
 
+  con.end()
 })
 
 server.listen(2000, () => {
