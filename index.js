@@ -14,9 +14,9 @@ app.use(express.urlencoded({
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-async function postData(url, stringData) {
+async function getData(url, stringData) {
   let resp = await axios({
-    method: 'post',
+    method: 'get',
     url: url,
     data: stringData,
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -32,7 +32,7 @@ async function postData(url, stringData) {
 app.post('/chat', async(req, res) => {
   const username = req.body.username
 
-  await postData('http://localhost:2000/find_one',JSON.stringify({username: username})).then(function(response){
+  await getData('http://44.197.34.158:8082/api/users',JSON.stringify({username: username})).then(function(response){
     if(response.data.length>0){
       res.render(__dirname + '/index.html', {username: username});
     }else{
