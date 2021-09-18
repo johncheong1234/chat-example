@@ -68,7 +68,7 @@ app.post('/chat', async(req, res) => {
     if(response.data.length>0){
       await getData(`http://44.197.34.158:8083/api/messages/name/${username}`).then(function(resp){
         console.log(resp)
-        res.render(__dirname + '/index.html', {username: username, chat_messages: JSON.stringify(resp.data)});
+        res.render(__dirname + '/index.html', {username: username, chat_messages: resp.data});
       })
       
     }else{
