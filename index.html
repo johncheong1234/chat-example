@@ -53,7 +53,7 @@
     }
     })
     
-    socket.on('chat message',({msg,sender,receiver})=>{
+    socket.on('chat message',({msg,sender,receiver, randomid})=>{
         var item = document.createElement('li');
         var button = document.createElement("button");
         button.innerHTML = "delete";
@@ -76,7 +76,7 @@
 
         item.appendChild(button);
         button.setAttribute('class','button')
-        item.setAttribute('id',msg)
+        item.setAttribute('id',randomid)
 
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
