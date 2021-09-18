@@ -17,7 +17,7 @@
   </head>
   <body>
     <h1 id='username'><%= username %></h1>
-    <p><%= chat_messages %></p>
+   
     <ul id="messages"></ul>
     <form id="form" action="">
       <input id="input" autocomplete="off" /><button>Send</button>
@@ -27,7 +27,12 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-    
+    var chat_messages = "<%= chat_messages %>";
+
+    for(const m of chat_messages){
+      console.log(m);
+    }
+
     const socket = io({
     autoConnect: false
     });
