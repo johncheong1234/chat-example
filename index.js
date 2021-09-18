@@ -64,7 +64,7 @@ async function DeleteData(url, stringData) {
 app.post('/chat', async(req, res) => {
   const username = req.body.username
 
-  await getData('http://44.197.34.158:8082/api/users',JSON.stringify({username: username})).then(function(response){
+  await getData('http://44.197.34.158:8082/api/users',JSON.stringify({username: username})).then(async(response)=>{
     if(response.data.length>0){
       await getData(`http://44.197.34.158:8083/api/messages/name/${username}`).then(function(resp){
         console.log(resp)
