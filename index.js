@@ -113,7 +113,7 @@ io.on('connection', (socket) => {
     console.log(msg, sender, receiver, randomid)
     io.to(sender).to(receiver).emit('delete',randomid);
 
-    getData(`http://44.197.34.158:8083/api/messages/delete${randomid}`)
+    getData(`http://44.197.34.158:8083/api/messages/delete/${randomid}`)
   })
 });
 
