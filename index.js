@@ -46,6 +46,21 @@ async function postData(url, stringData) {
   return resp;
 }
 
+async function DeleteData(url, stringData) {
+  let resp = await axios({
+    method: 'delete',
+    url: url,
+    data: stringData,
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    maxContentLength: 100000000,
+    maxBodyLength: 1000000000
+  }).catch(err => {
+    throw err;
+  })
+  console.log("DeleteData: response:", resp.data);
+  return resp;
+}
+
 app.post('/chat', async(req, res) => {
   const username = req.body.username
 
@@ -97,6 +112,7 @@ io.on('connection', (socket) => {
     console.log('message deleted')
     console.log(msg, sender, receiver, randomid)
     io.to(sender).to(receiver).emit('delete',randomid);
+    DeleteData(`http://44.197.34.158:8083/api/messages/${randomid}`)
   })
 });
 
