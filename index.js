@@ -93,10 +93,10 @@ io.on('connection', (socket) => {
     console.log('user disconnected');
   });
 
-  socket.on('delete', ({msg, sender, receiver})=>{
+  socket.on('delete', ({msg, sender, receiver, randomid})=>{
     console.log('message deleted')
-    console.log(msg, sender, receiver)
-    io.to(sender).to(receiver).emit('delete',msg);
+    console.log(msg, sender, receiver, randomid)
+    io.to(sender).to(receiver).emit('delete',randomid);
   })
 });
 
