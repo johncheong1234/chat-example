@@ -27,7 +27,7 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-    var chat_messages = "<%= chat_messages %>";
+    var chat_messages = "<%-JSON.stringify(chat_messages)%>";
 
     console.log(chat_messages)
 
