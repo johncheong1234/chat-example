@@ -27,7 +27,7 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-    var chat_messages = "<%= chat_messages %>";
+    var chat_messages = JSON.parse("<%= chat_messages %>");
 
     for(const m of chat_messages){
       console.log(m);
