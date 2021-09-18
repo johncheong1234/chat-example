@@ -29,7 +29,35 @@
     <script>
     var chat_messages = <%-JSON.stringify(chat_messages)-%>
 
-    console.log(chat_messages)
+    for (const m of chat_messages){
+      var item = document.createElement('li');
+      var button = document.createElement("button");
+      button.innerHTML = "delete";
+
+      button.addEventListener('click', () => {
+        console.log('clicked');
+        // document.getElementById(msg).remove()
+        // my_array = msg.split('_')
+
+        socket.emit("delete", {
+          msg: m['message_text'],
+          sender: m['sender'],
+          receiver: m['receiver'],
+          randomid: m['randomid']
+        });
+        
+        }, false);
+        
+        // my_array = msg.split('_')
+        item.textContent = m['message_text']+' || sender: '+ m['sender'];
+
+        item.appendChild(button);
+        button.setAttribute('class','button')
+        item.setAttribute('id',m['randomid'])
+
+        messages.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+    }
 
     const socket = io({
     autoConnect: false
