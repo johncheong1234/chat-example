@@ -123,6 +123,8 @@ io.on('connection', (socket) => {
   socket.on('edit completed',({msg, sender, receiver, randomid})=>{
     io.to(socket.handshake.auth.username).to(receiver).emit('edit completed', {msg, sender, receiver, randomid});
     console.log(`edit completed sent from ${sender}, received by ${receiver}`);
+
+    getData(`http://44.197.34.158:8083/api/messages/edit/${randomid}`, {message_text: msg})
   })
 });
 
