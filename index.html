@@ -139,13 +139,50 @@
       const new_msg = document.getElementById('new_msg').value;
       console.log(sender, receiver, randomid, new_msg)
 
-      // socket.emit("edit completed", {
-      //     msg: msg,
-      //     sender: sender,
-      //     receiver: receiver,
-      //     randomid: randomid
-      //   });
+      socket.emit("edit completed", {
+          msg: new_msg,
+          sender: sender,
+          receiver: receiver,
+          randomid: randomid
+        });
     }
+
+    socket.on('edit completed',({msg,sender,receiver, randomid})=>{
+       
+        var delete_button = document.createElement("button");
+        delete_button.innerHTML = "delete";
+
+        delete_button.addEventListener('click', () => {
+        console.log('clicked');
+        // document.getElementById(msg).remove()
+        // my_array = msg.split('_')
+
+        socket.emit("delete", {
+          msg: msg,
+          sender: sender,
+          receiver: receiver,
+          randomid: randomid
+        });
+        
+        }, false);
+
+        var edit_button = document.createElement("button");
+        edit_button.innerHTML = 'edit'
+
+        edit_button.addEventListener('click',()=>{
+
+          document.getElementById(randomid).innerHTML = `<textarea maxlength="5000" cols="20" rows="5" id='new_msg'>${msg}</textarea>` + 
+   `<button id="complete_edit" onclick=complete_edit('${sender}','${receiver}','${randomid}')>Done</button>`
+
+        })
+        // my_array = msg.split('_')
+        var item = document.getElementById(randomid);
+        item.innerHTML=''
+        item.textContent = msg+' || sender: '+sender;
+        item.appendChild(delete_button);
+        item.appendChild(edit_button)
+        delete_button.setAttribute('class','delete_button')
+    })
     </script>
   </body>
 </html>

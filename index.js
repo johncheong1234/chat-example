@@ -119,6 +119,10 @@ io.on('connection', (socket) => {
 
     getData(`http://44.197.34.158:8083/api/messages/delete/${randomid}`)
   })
+
+  socket.on('edit completed',({msg, sender, receiver, randomid})=>{
+    io.to(socket.handshake.auth.username).to(receiver).emit('edit completed', {msg, sender, receiver, randomid});
+  })
 });
 
 server.listen(3000, () => {
