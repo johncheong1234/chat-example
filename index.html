@@ -135,9 +135,12 @@
         // my_array = msg.split('_')
         item.textContent = msg+' || sender: '+sender;
 
-        item.appendChild(delete_button);
-        item.appendChild(edit_button)
-        delete_button.setAttribute('class','delete_button')
+        if(username==m['sender']){
+          item.appendChild(delete_button);
+          item.appendChild(edit_button);
+          delete_button.setAttribute('class','delete_button')
+        }
+        
         item.setAttribute('id',randomid)
 
         messages.appendChild(item);
