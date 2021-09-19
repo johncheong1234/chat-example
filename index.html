@@ -136,8 +136,8 @@
     function complete_edit(sender, receiver, randomid){
       console.log('edit completed')
 
-      const new_msg = document.getElementById('new_msg').innerText;
-      console.log(sender, receiver, randomid, new_msg)
+      const new_msg = document.getElementById('new_msg').value;
+      console.log(sender, receiver, randomid)
 
       // socket.emit("edit completed", {
       //     msg: msg,
