@@ -140,7 +140,7 @@
           item.appendChild(edit_button);
           delete_button.setAttribute('class','delete_button')
         }
-        
+
         item.setAttribute('id',randomid)
 
         messages.appendChild(item);
@@ -198,9 +198,13 @@
         var item = document.getElementById(randomid);
         item.innerHTML=''
         item.textContent = msg+' || sender: '+sender;
-        item.appendChild(delete_button);
-        item.appendChild(edit_button)
-        delete_button.setAttribute('class','delete_button')
+
+        if(username == sender){
+          item.appendChild(delete_button);
+          item.appendChild(edit_button)
+          delete_button.setAttribute('class','delete_button')
+        }
+        
     })
     </script>
   </body>
