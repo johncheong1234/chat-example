@@ -31,10 +31,10 @@
 
     for (const m of chat_messages){
       var item = document.createElement('li');
-      var button = document.createElement("button");
-      button.innerHTML = "delete";
+      var delete_button = document.createElement("button");
+      delete_button.innerHTML = "delete";
 
-      button.addEventListener('click', () => {
+      delete_button.addEventListener('click', () => {
         console.log('clicked');
         // document.getElementById(msg).remove()
         // my_array = msg.split('_')
@@ -51,8 +51,8 @@
         // my_array = msg.split('_')
         item.textContent = m['message_text']+' || sender: '+ m['sender'];
 
-        item.appendChild(button);
-        button.setAttribute('class','button')
+        item.appendChild(delete_button);
+        delete_button.setAttribute('class','delete_button')
         item.setAttribute('id',m['randomid'])
 
         messages.appendChild(item);
