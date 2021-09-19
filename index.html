@@ -110,9 +110,13 @@
 
         edit_button.addEventListener('click',()=>{
 
-          document.getElementById(randomid).innerHTML = '<textarea maxlength="5000" cols="5" rows="10"></textarea>' + 
-   '<button>Done</button>"'
+          document.getElementById(randomid).innerHTML = '<textarea maxlength="5000" cols="20" rows="5"></textarea>' + 
+   '<button id="complete_edit">Done</button>'
 
+        })
+
+        document.getElementById('complete_edit').addEventListener('click',()=>{
+          console.log('complete edit');
         })
         
         // my_array = msg.split('_')
