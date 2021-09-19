@@ -47,11 +47,22 @@
         });
         
         }, false);
+
+        var edit_button = document.createElement("button");
+        edit_button.innerHTML = 'edit'
+
+        edit_button.addEventListener('click',()=>{
+
+          document.getElementById(randomid).innerHTML = `<textarea maxlength="5000" cols="20" rows="5" id='new_msg'>${msg}</textarea>` + 
+   `<button id="complete_edit" onclick=complete_edit('${sender}','${receiver}','${randomid}')>Done</button>`
+
+        })
         
         // my_array = msg.split('_')
         item.textContent = m['message_text']+' || sender: '+ m['sender'];
 
         item.appendChild(delete_button);
+        item.appendChild(edit_button);
         delete_button.setAttribute('class','delete_button')
         item.setAttribute('id',m['randomid'])
 
