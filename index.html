@@ -135,7 +135,7 @@
         // my_array = msg.split('_')
         item.textContent = msg+' || sender: '+sender;
 
-        if(username==m['sender']){
+        if(username==sender){
           item.appendChild(delete_button);
           item.appendChild(edit_button);
           delete_button.setAttribute('class','delete_button')
