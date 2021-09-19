@@ -110,8 +110,8 @@
 
         edit_button.addEventListener('click',()=>{
 
-          document.getElementById(randomid).innerHTML = `<textarea maxlength="5000" cols="20" rows="5">${msg} || ${sender}: </textarea>` + 
-   '<button id="complete_edit" onclick="complete_edit()">Done</button>'
+          document.getElementById(randomid).innerHTML = `<textarea maxlength="5000" cols="20" rows="5" id='new_msg'>${msg}</textarea>` + 
+   `<button id="complete_edit" onclick="complete_edit(${sender},${receiver},${randomid})">Done</button>`
 
         })
 
@@ -133,8 +133,18 @@
       document.getElementById(randomid).remove()
     })
 
-    function complete_edit(){
+    function complete_edit(sender, receiver, randomid){
       console.log('edit completed')
+
+      const new_msg = document.getElementById('new_msg').innerText;
+      console.log(sender, new_msg, receiver, randomid)
+
+      // socket.emit("edit completed", {
+      //     msg: msg,
+      //     sender: sender,
+      //     receiver: receiver,
+      //     randomid: randomid
+      //   });
     }
     </script>
   </body>
