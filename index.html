@@ -104,6 +104,21 @@
         });
         
         }, false);
+
+        var edit_button = document.createElement("button");
+        edit_button.innerHTML = 'edit'
+
+        edit_button.addEventListener('click',()=>{
+          var input = document.createElement('TEXTAREA');
+          input.value = msg+' || sender: '+sender;
+
+          var done_button = document.createElement('BUTTON');
+          done_button.addEventListener('click',()=>{
+            console.log('edit done')
+          })
+
+          document.getElementById(randomid).innerHTML = input, button;
+        })
         
         // my_array = msg.split('_')
         item.textContent = msg+' || sender: '+sender;
