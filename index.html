@@ -111,7 +111,7 @@
         edit_button.addEventListener('click',()=>{
 
           document.getElementById(randomid).innerHTML = `<textarea maxlength="5000" cols="20" rows="5" id='new_msg'>${msg}</textarea>` + 
-   `<button id="complete_edit" onclick="complete_edit("${sender}","${receiver}","${randomid}")">Done</button>`
+   `<button id="complete_edit" onclick=complete_edit('${sender}','${receiver}','${randomid}')>Done</button>`
 
         })
 
