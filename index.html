@@ -109,15 +109,10 @@
         edit_button.innerHTML = 'edit'
 
         edit_button.addEventListener('click',()=>{
-          var input = document.createElement('TEXTAREA');
-          input.value = msg+' || sender: '+sender;
 
-          var done_button = document.createElement('BUTTON');
-          done_button.addEventListener('click',()=>{
-            console.log('edit done')
-          })
+          document.getElementById(randomid).innerHTML = '<textarea maxlength="5000" cols="80" rows="40"></textarea>' + 
+   '<button></button>"'
 
-          document.getElementById(randomid).innerHTML = input, button;
         })
         
         // my_array = msg.split('_')
